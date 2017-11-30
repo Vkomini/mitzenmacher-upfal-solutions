@@ -1,0 +1,480 @@
+\chapter{Events and Probability}
+
+\section{Comments on the main text}
+
+\section{Exercises}
+
+\subsection*{Exercise 1.1}
+
+Flip a fair coin ten times.
+
+\noindent (a) $\P(\text{\#heads = \#tails}) = \frac{\binom {10} 5}{2^{10}} = \frac{63}{256}$
+
+\noindent (b) $\P(\text{more heads than tails}) = \left(\binom {10}{6} + \binom {10}{7} + \binom {10}{8} +
+\binom {10}{9} + \binom {10}{10} \right) / 2^{10}$
+
+\noindent (c) $\P(\text{the ith flip and the (11-i)th flip are the same for i = 1...5}) = (1/2)^{5}$
+
+\noindent (d) $\P(\text{at least 4 consecutive heads}) = \P(\text{consecutive 4}) + \P(\text{consecutive 5}) + \P(\text{consecutive 6})
++\P(\text{consecutive 7}) + \P(\text{consecutive 8}) + \P(\text{consecutive 9}) + \P(\text{consecutive 10}) = ( (2 \times 2^5 + 5 \times 2^4 - 3 - 2)
++ (2 \times 2^4 + 4 \times 2^3) + (2 \times 2^3 + 3 \times 2^2) + (2 \times 2^2 + 2 \times 2^1) + (2 \times 2^1 + 1 \times 2^0) + 2 + 1)
+/1024 = 251/1024 $.
+
+Consecutive 5,6,7,8,9,10 are easy to understand. Consecutive 4 is special. There are 2 cases in consecutive 4 which are actually
+consecutive 5 (HHHHTHHHHH and HHHHHTHHHH). There are 3 cases in consecutive 4 which are duplicated (HHHHTTHHHH, HHHHTHHHHT, THHHHTHHHH). 
+
+
+Another method of doing this is to use recursion. 
+
+Let $\P_4(n)$ be the probability that you have at least 4 consecutive heads after n flips.
+Clearly $\P_4(0) = \P_4(1) = \P_4(2) = \P_4(3) = 0$ and $\P_4(4)= 2^{-4}$.
+
+For more flips, either you have achieved 4 consecutive heads already or you have a string without 
+4 consecutive heads followed by THHHH. So for $n > 4$: $\P_4(n) = \P_4 (n - 1) + 2^{-5} (1 - \P_4(n-5))$.
+Because, if $(n-1)$ already has 4 consecutive heads, the probability is just $\P_4(n-1)$, if it does
+not have, and we want $n$ to have, then we know that the $n$th flip must be H and the last 5 flips
+out of $n$ flips must be THHHH. Only in this way can we say that the first $n-1$ does not achieve it
+but with the last flip it achieves. 
+
+\subsection*{Exercise 1.2}
+
+Roll two standard dice.
+
+\noindent (a) same number: 1/6
+
+\noindent (b) the number on the 1st dice $>$ the number on the 2nd dice: 15/36, (6 equal cases, the rest are symmetric)
+
+\noindent (c) the sum is even: 1/2
+
+\noindent (d) the product is a perfect square: (6 + 2)/36. (6 pairs of identical numbers, 1 * 4 and 4 * 1 are also two cases)
+
+
+\subsection*{Exercise 1.3}
+
+Shuffle a standard deck of cards.
+
+\noindent (a) first two cards include at least one ace: $1 - \frac{48}{52} \cdot \frac{47}{51}$, use 1 minus the probability
+that neither of them is ace. Or we can view it as just draw two cards from a deck and they have at least one ace: 
+1 - $\binom{48}{2}/\binom{52}{2}$.
+
+
+\noindent (b) first five cards include at least one ace: 
+$1 - \frac{48 \times 47 \times 46 \times 45 \times 44}{52 \times 51 \times 50 \times 49 \times 48}$
+
+\noindent (c) first two cards are a pair of the same rank: 3/51
+
+\noindent (d) first five cards are all diamonds: $(13 \times 12 \times 11 \times 10 \times 9)/(52 \times 51 \times 50 \times 49 \times 48)$
+
+\noindent (e) first five cards form a full house ( three of one rank and two of another rank):
+in this problem, we see it as drawing 5 random cards from a deck. The sample space is $\binom{52}{5}$. To be a full house, we need to
+first pick two numbers $\binom{13}{2}$, then one of them has three cards and the other has two cards $\binom{4}{3} \binom{4}{2} \times 2 = 3744$.
+So the probability is 3744/$\binom{52}{5}$.
+
+\subsection*{Exercise 1.4}
+
+Let $E_k$ be the event that the loser has won $k$ games, where $0 \leq k \leq n-1$.
+
+If the game stops and the loser won $k$ games, then it means there are $n + k$ games in total. the $k$ games
+won by the loser can happen at any place except the last one. 
+
+The answer for $k$ is 
+
+\begin{equation*}
+\P[E_k] = \frac{\binom{n+k-1}{k}}{2^{n+k-1}}
+\end{equation*}
+
+We want to verify this result. Since $k < n$, we know that for a fixed $n$ we need to prove,
+
+\begin{equation*}
+\sum_{k = 0}^{n - 1} \P[E_k] = \sum_{k = 0}^{n - 1} \frac{\binom{n+k-1}{k}}{2^{n+k-1}} = 1
+\end{equation*}
+
+
+\subsection*{Exercise 1.5}
+
+(a) (b) (c) Just enumerate?
+
+\subsection*{Exercise 1.6}
+
+Show that the number of white balls is equally likely to be any number between 1 and $n-1$.
+Hint: Use mathematical induction.
+
+Let $W_n$ be the random variable representing the number of white balls when there are
+$n$ balls in total.
+
+Base case: $n = 3$. $\P[W_3 = 1] = 1/2$ and $\P[W_3 = 2] = 1/2$ because the third
+ball can be either white or black with equal probability.
+
+Inductive step: Let $X_n$ be the random variable representing the $n$th ball. It is $b$ if it is
+black and $w$ if white.
+Assuming $\P[W_n = i] = \frac{1}{n-1} \forall i = 1,2...n$, then we can derive that
+
+\begin{equation*}
+\begin{split}
+\P[W_{n+1} = i] & = \P[W_n = i - 1] \cdot \P[X_n = w | W_n = i - 1] \\
+&\ \ + \P[W_n = i] \cdot \P[X_n = b | W_n = i] \\
+& = \frac{1}{n-1} \frac{i - 1}{n} + \frac{1}{n - 1} \frac{n - i}{n} \\
+& = \frac{1}{n}
+\end{split}
+\end{equation*}
+
+\subsection*{Exercise 1.7}
+
+\noindent (a) \url{https://proofwiki.org/wiki/Inclusion-Exclusion_Principle}
+
+\noindent (b)(c) Bonferroni Inequalities.
+
+Define 
+
+\begin{equation*}
+S_k := \sum_{1\leq i_1 < ... <  i_k \leq n} \P(A_{i_1} \cap ... \cap A_{i_k})
+\end{equation*}
+
+
+\subsection*{Exercise 1.8}
+
+Let $E_1, E_2, E_3$ be the events that the number chosen is divisible by 4,6,9.
+
+\begin{equation*}
+\begin{split}
+\P[E] & = \P[E_1] + \P[E_2] + \P[E_3] - \P[E_1 \cap E_2]
+- \P[E_2 \cap E_3] - \P[E_1 \cap E_3] \\
+& \ \ \ + \P[E_1\cap E_2 \cap E_3] \\
+& =  250000/10^6 + 166666/10^6 + 111111/10^6 - 83333/10^6 \\
+& \ \ - 55555/10^6 - 27777/10^6 + 27777/10^6\\
+& = 38889/1000000
+\end{split}
+\end{equation*}
+
+\subsection*{Exercise 1.9}
+
+Flip a fair coin $n$ times.
+For $k>0$, find an upper bound on the probability that there is a sequence of $\log_2 n + k$ consecutive heads.
+
+Let's begin by defining the probability space and events we will analyse. First, let
+$H_i$ be the event that the $i$th coin comes up heads. Similarly, let
+$S_i$ denote the event that $\log_2 n + k$ consecutive coin flips are heads, starting with the
+$i$th flip. We can derive an upper bound on the probability $p$ that there is a sequence of 
+$\log_2 n + k$ consecutive heads using the union bound.
+Note that only a single run of $\log_2 n + k$ heads within $n$
+flips is required for success. As a result,
+we can apply the union bound to the sequence of events $S_i$
+to obtain
+
+\begin{equation*}
+p = \P\left(\bigcup_{i \in I} S_i \right) \leq \sum_{i \in }\P[S_i]
+\end{equation*}
+where $I = \{1,2,3... n - \log_2 n - k + 1\}$. Note that the limits of the summation have been selected
+to prevent indexing events which do not exist (e.g. $S_0, S_{n - \log_2 n - k + 2}$).
+
+At this point, we need to determine $\P[S_i]$. For any given sequence starting at flip
+$i$, each coin toss will be independent of the others (i.e., $\{H_i\}$ are mutually independent). As a result, we can
+express the desired probability
+
+\begin{equation*}
+\P[S_1] = \P\left[\bigcap_{i=1}^{\log_2 n + k} H_i\right] = \prod_{i=1}^{\log_2 n + k} \P[H_i]
+= (\frac{1}{2})^{\log_2 n + k} = \frac{1}{2^k n}
+\end{equation*}
+
+Similarly, $\P[S_i]$ must also be $1/2^k n$ because we only care about the coin sequence starting from
+the $i$th coin. Substituting into the union bound.
+
+\begin{equation*}
+p \leq \sum_{i=1}^{n - \log_2 n - k + 1} \frac{1}{2^k n} = \frac{n - \log_2 n - k + 1}{2^k n} \leq 2^{-k}
+\end{equation*}
+
+\begin{remark}
+	This exercise shows us that to bound a probability we do not have to think about the exact probability
+	very carefully. We can just simplify the procedure by omitting some details. For example, we know that
+	when $S_1$ happens, it can also mean that $S_2$ may happen. However, we do not care about the duplicated
+	cases. We just need to know that the actual probability is smaller than $\P[S_1] + \P[S_2]$.
+	In practice, if this sum is small, then that is already enough for us.
+\end{remark}
+
+\subsection*{Exercise 1.10}
+
+Let $F$ represent the event that I flip a fair coin, let $T$ represent the event that I flip a two-headed coin.
+Let $X$ be the random variable representing the result of the flip. 
+
+\begin{equation*}
+\begin{split}
+\P[T | X = H] & = \frac{\P[T \cap (X = H)]}{\P[X = H]} \\
+& = \frac{1/2 \cdot 1}{\P[X = H | F]\P[F] + \P[X = H | T]\P[T]} \\
+& = \frac{1/2}{1/2 \cdot 1/2 + 1 \cdot 1/2} \\
+& = \frac{2}{3}
+\end{split}
+\end{equation*}
+
+\subsection*{Exercise 1.11}
+
+\noindent (a) Obviously, only when the bit is flipped even times can we get a correct bit.
+
+\noindent (b) We study the probability that after the bit passes through the relays it is flipped.
+
+\begin{equation*}
+\frac{1-q_1}{2} \cdot (1 - \frac{1-q_2}{2}) + \frac{1-q_2}{2} \cdot (1 - \frac{1-q_1}{2}) = \frac{1-q_1q_2}{2}
+\end{equation*}
+
+\noindent (c) 
+The proof is by induction. For the base case, let $n = 1$. The probability of receiving the correct bit
+is given by:
+
+\begin{equation*}
+\frac{1 + (1 - 2p)}{2} = 1 - p
+\end{equation*}
+
+The base case now is verified. We want to prove that when $n = k$ is valid, then $n = k+1$ is also valid.
+Let $E_n$ be the event that we receive a correct bit after $n$ relays. 
+
+\begin{equation*}
+\P[E_{n+1}] = \P[E_n]\cdot (1-p) + (1 - \P[E_n]) \cdot p = \frac{1 + (1-2p)^{n+1}}{2}
+\end{equation*}
+
+\qed
+
+\subsection*{Exercise 1.12}
+
+Monty Hall Problem.
+
+This is a classic problem in probability and the ``counter-intuitive'' result can best be seen by
+applying Bayes' Law. To begin our analysis let's enumerate the sample space. Let $O_i$
+correspond to the event where Monty opens door $i$. In addition, let $C_i$
+be the event that the car is behind door $i$. 
+Without loss of generality we can assume that the contestant always initially chooses the first
+door and that Monty chooses the second (since we could always permute the door labels to achieve
+this condition). Subject to this condition, the sample space $\Omega$ can be enumerated simply by the
+position of the car as $\Omega = \{C_1, C_2, C_3\}$.
+
+We now know that the condition is that Monty opens the door 2. Therefore, all we need to do is to compare
+the probability $\P[C_1 | O_2]$ and $\P[C_3 | O_2]$.
+
+\begin{equation*}
+\P[C_1 | O_2] = \frac{\P[O_2 | C_1] \cdot \P[C_1]}{\sum_{i=1}^{3} \P[O_2 | C_i]\P[C_i]},
+\P[C_3 | O_2] = \frac{\P[O_2 | C_3] \cdot \P[C_3]}{\sum_{i=1}^{3} \P[O_2 | C_i]\P[C_i]}
+\end{equation*}
+
+To calculate these two probabilities, we need to figure out all quantities here. $\P[C_i] = 1/3$.
+$\P[O_2 | C_1] = 1/2, \P[O_2 | C_2] = 0, \P[O_2 | C_3] = 1$. Here, since the contestant
+already chose the door 1, if the car is behind the door 1, then Monty would open the door 2 with probability 1/2, if the
+car is behind the door 2, Monty would not open it, if the car is behind the door 3, Monty would definitely open
+the door 2 because there is no other doors to choose.
+
+Therefore, $\P[C_1 | O_2] = 1/3$ and $\P[C_3 | O_2] = 2/3$. So we always change the door and we always get larger
+probability. 
+
+How to understand this intuitively? One idea is that we think about these two cases, the first case is that the contestant chose
+the right one with probability 1/3, and the wrong one with probability 2/3. Monty always opens a door behind which there is no car.
+If we fall in the first case, then it means changing would give us a failure. If we fall in the second case, then it means that
+changing would give us a success. Since we have larger probability to fall in the second case, we like to choose to change our
+option.
+
+\subsection*{Exercise 1.13}
+
+We need to calculate the probability. Let the random variable $R$ represent the result of the test. It is $P$ if positive
+and $N$ if negative. Let $D$ be whether the patient has the disorder. It is $T$ if true, and $F$ if false.
+
+\begin{equation*}
+\begin{split}
+\P[D = T | R = P] & = \frac{\P[R =P | D = T] \cdot \P[D = T]}{\P[R = P]} \\
+& = \frac{\P[R = P | D = T] \cdot \P[D = T]}{\P[R = P | D = T] \cdot \P[D = T]
+	+ \P[R = P | D = F] \cdot \P[D = F]} \\
+& = \frac{0.999 \cdot 0.02}{0.999 \cdot 0.02 + 0.005 \cdot 0.98} \\
+& = 0.80305466237
+\end{split}
+\end{equation*}
+
+\subsection*{Exercise 1.14}
+
+Let $M$ represent the event that he wins 3 games and I win 1 game. Let $E_1$ be the event that I am better,
+$E_2$ equally good, $E_3$ be the event that he is better. $\P[E_i] = 1/3$.
+
+Then we want 
+
+\begin{equation*}
+\begin{split}
+\P[E_3 | M] & = \frac{\P[M | E_3] \P[E_3]}{\sum_{i=1}^{3} \P[M | E_i] \P[E_i]} \\
+& = \frac{0.0864}{0.0864 + 0.0625 + 0.0384} \\
+& \approx 0.461
+\end{split}
+\end{equation*}
+
+\subsection*{Exercise 1.15}
+
+We use the principle of deferred decisions. 
+
+It does not matter whether what outcomes are for the previous 9 dice. There is always one outcome of the 10th dice
+that can make the result divisible by 6. The probability that we can get this number is just 1/6.
+
+\subsection*{Exercise 1.16}
+
+\noindent (a) All three show the same number on the first roll: 1/36
+
+\noindent (b) Exactly two of them show the same number on the first roll: 5/12
+
+\noindent (c) When two of the three dice showing the same number on the first roll, the player can roll the different one
+once, if it succeeds, then the game ends, if it does not succeeds, the player can roll it one more time. The probability
+should be $1 - (\frac{5}{6})^2 = 11/36$.
+
+\noindent (d)
+
+The probability that the player wins the game:
+
+$p = \frac{1}{36} + \frac{15}{36} \cdot \frac{11}{36} + \frac{20}{36} 
+\cdot (\frac{1}{36} + \frac{15}{36} \cdot \frac{1}{6} + \frac{20}{36} \cdot \frac{1}{36}) $
+
+
+\subsection*{Exercise 1.17}
+
+I don't think the analysis would change...
+
+\subsection*{Exercise 1.18}
+
+\noindent (a) Choose $x \in \{0,...,n-1\}$ uniformly and let $y = z - x \mod n$. Then outputs $F(z) = F(x) + F(y) \mod m$. 
+The result is wrong if either of $x$ and $y$ is corrupted. By union bound, this is $2/5$. 
+
+\noindent (b) When we can do 3 times, we take the majority vote. If there is no such thing, then we return the first answer.
+
+The algorithm is wrong when at least two outputs are wrong. Assuming the probability that one test gives us wrong answer is
+$p_z$. By (a), we know that $p_z \leq 2/5$. The error probability now is $\binom{3}{2} p_z^2(1-p_z) + \binom{3}{3} p_z^3 \leq
+0.352$.
+
+Note that the first term is actually  $2p_z^2(1-p_z)$ because if the first test is correct then the algorithm would also give
+us a correct answer.
+
+\subsection*{Exercise 1.19}
+
+$A | B < A, A | B = A, A | B > A$
+
+\subsection*{Exercise 1.20}
+
+If $E_1, E_2, E_3,...,E_k$ are mutually independent then we know that for any subset $I \subseteq [1,k]$,
+
+\begin{equation*}
+\P\left[\bigcap_{i\in I}E_i \right] = \prod_{i\in I}\P[E_i]
+\end{equation*}
+
+We now want to prove that $\overline{E_1}, \overline{E_2}, \overline{E_3}...\overline{E_k}$ are mutually independent.
+So we want to prove that for any subset $I \subseteq [1,k]$,
+
+\begin{equation*}
+\begin{split}
+\P\left[\bigcap_{i\in I}\bar{E_i} \right] = \prod_{i\in I}\P[\bar{E_i}] \\
+\end{split}
+\end{equation*}
+
+By de morgan law, we know that $\cap_{i \in I} \overline{E_i} = \overline{\cup_{i \in I} E_i}$.
+
+\begin{equation*}
+\begin{split}
+\P\left[\bigcap_{i\in I}\overline{E_i} \right] & = 1 - \P\left[\bigcup_{i \in I} E_i \right] \\
+& = 1 - \Bigg( \sum_{i\in I} \P(E_i) - \sum_{i<j \in I} \P(E_i \cap E_j) \\
+& \ \ \ \ + \sum_{i<j<k \in I} \P(E_i \cap E_j \cap E_k) \\
+& \ \ \ \ - ... + (-1)^{l+1} \sum_{i_1 < i_2 < ... < i_l \in I} \P( \bigcap_{r=1}^{l} E_{ir}) \Bigg) \\
+& = 1 - \Bigg( \sum_{i\in I} \P(E_i) - \sum_{i<j \in I} \P(E_i) \cdot \P(E_j) \\
+& \ \ \ \ + \sum_{i<j<k \in I} \P(E_i) \cdot \P(E_j) \cdot \P(E_k) \\
+& \ \ \ \ - ... + (-1)^{l+1} \sum_{i_1 < i_2 < ... < i_l \in I} \prod_{r=1}^{l}\P ( E_{ir} ) \Bigg) \\
+& = \prod_{i \in I}(1 - \P[E_i])\\
+& = \prod_{i\in I}\P[\overline{E_i}] \\ 
+\end{split}
+\end{equation*}
+
+\subsection*{Exercise 1.21}
+
+Suppose that we throw a fair four-sided die (you may think of this as a square
+die thrown in a two-dimensional universe). We may take $\Omega = \{1, 2,3,4\}$, where each $\omega \in \Omega$
+is equally likely to occur. The events $A = \{1, 2\}, B = \{1, 3\}, C = \{1,4\}$ are pairwise
+independent but not independent.
+
+\subsection*{Exercise 1.22}
+
+\noindent (a) Each possible subset has the same probability to be chosen, $1/2^n$. To generate this $X$,
+we know that for all elements in $X$, the probability that they got chosen is $1/2^{|X|}$. The probability
+that the others in $\{1,...,n\}$ are not chosen is $1/2^{(n-|X|)}$. Then the probability that we generate
+this $X$ is just $1/2^{n}$.
+
+\noindent (b) 
+
+We generate two sets $X$ and $Y$.
+
+\begin{equation*}
+\P[X \subseteq Y] = \frac{\sum_{i=0}^{n} \binom{n}{i} \cdot 2^{i}}{2^n \cdot 2^{n}} = \frac{(2+1)^n}{4^n} = (\frac{3}{4})^n
+\end{equation*}
+
+Another perspective is that, for each element, both $X$ and $Y$ have a probability $1/2$ to choose it. We also
+know that to make $X \subseteq Y$, either $Y$ chooses it or they both do not choose it. The probability is therefore
+$1/2 + 1/4 = 3/4$. There are $n$ elements. So the probability is $(3/4)^n$.
+
+Next, we look at the probability that $X$ and $Y$ include all the elements.
+
+\begin{equation*}
+\P[X \cup Y = \{1,...,n\}] = (3/4)^n
+\end{equation*}
+
+For one element, it is in either $X$ or $Y$ with probability $3/4$. We require that all elements are
+either in $X$ or in $Y$.
+
+\begin{equation*}
+\P\left[\bigcap_{\omega \in \{1,...,n\}} (\omega \in X \cup \omega \in Y) \right] = (3/4)^n
+\end{equation*}
+
+Another version of the answer can be found here: \url{http://oak.conncoll.edu/cchung/coursework/hw1.pdf}.
+
+\subsection*{Exercise 1.23}
+
+By using the randomized min-cut algorithm, we can reduce the graph from $n$ vertices to just $2$ vertices.
+We take the edges between these two nodes as our min-cut set. There are at most $\binom{n}{2} = n(n-1)/2$
+such pairs of vertices. According to our analysis, some of them may be the min-cut sets we need while the
+others are not. Even if all of them are distinct min-cut sets, the number of min-cut sets would not exceed the number
+of such pairs. Hence, there are at most $n(n-1)/2$ distinct min-cut sets.
+
+\subsection*{Exercise 1.24}
+
+We know that to cut the graph into two connected components, we contract edges until there are only
+two vertices left. Hence, to cut the graph into $r$ connected components, we contract edges until there
+are only $r$ vertices left. 
+
+We use the similar way as we did in finding a 2-way cut set. Assuming the size of the $r$-way cut set
+is $k$. Then the average degree should be at least $k/(r-1)$ (would be interesting to discuss, but should be easy). 
+The number of edges should be at least
+$nk/2(r-1)$.
+
+
+\begin{equation*}
+\P[F_{n-r}] \geq \prod_{i=1}^{n-r} \left(1- \frac{2(r-1)}{n-i+1}\right)
+\end{equation*}
+
+This should stop at some point. Another similar answer can be found at
+\url{https://hkn.eecs.berkeley.edu/~chris/CS174/mt1reviewsoln.pdf}.
+
+\subsection*{Exercise 1.25}
+
+\noindent (a) The number of edge contractions should be $2(n-2)$. The probability that it finds a min-cut
+is $(1- p)^2$ where $p = 2/n(n-1)$.
+
+\noindent (b) The number of edge contractions should be $(n-k) + l(k-2)$.
+
+\begin{equation*}
+p = \frac{k(k-1)}{n(n-1)} \cdot \left(1 - \left(1- \frac{2}{k(k-1)}\right)^l\right) \approx \frac{k^2}{n^2}(1-e^{-\frac{2l}{k^2}})
+\end{equation*}
+
+\noindent (c) Find optimal values of $k$ and $l$ for the variation in (b) that maximize the probability
+of finding a minimum cut while using the same number of edge contractions as running the original algorithm
+twice.
+
+We know the condition is that the number of edge contractions is $(n-k) + l(k-2) = 2(n-2)$. Hence,
+$l = \frac{n+k-4}{k-2}$, and the above expression becomes roughly $\frac{k^2}{n^2}(1 - e^{-\frac{n+k}{k^3}})$.
+We claim that, up to constant factors, this is maximized by taking $k = n^{1/3}$. To see this, note that
+if $k \geq n^{1/3}$, since $1 - e^{-x} \leq x (x\geq 0)$, this expression is at most $\frac{k^2}{n^2}\frac{n+k}{k^3} = \frac{n+k}{kn^2}$.
+Similarly, if $k\leq n^{1/3}$,
+then $(1 - e^{-\frac{n+k}{k^3}})$ is at least a constant bounded away from zero, and hence, up to constant factors,
+the probability of success is $\Omega(n^{2/3}/n^2) = \Omega(n^{-4/3})$, which is significantly better than the
+$O(1/n^2)$ in (a).
+
+
+The solution to (c) is from here:
+
+\url{theory.stanford.edu/~valiant/teaching/CS265_2015/ps1_sols.pdf}
+
+\subsection*{Exercise 1.26}
+ 
+Programming...

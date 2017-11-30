@@ -1,0 +1,676 @@
+\chapter{Discrete Random Variables and Expectation}
+
+\section{Comments on the main text}
+
+\section{Exercises}
+
+\subsection*{Exercise 2.1}
+
+(k+1)/2
+
+\subsection*{Exercise 2.2}
+
+The probability that typing ``proof'' is $\frac{1}{26^5}$. Let $X_i$ be the random variable
+that is 1 if the word ``proof'' starts at the position $i$. Therefore, by linearity of 
+expectation
+
+\begin{equation*}
+\E[X] = \sum_{i=1}^{999996} \E[X_i] = \frac{999996}{26^5}
+\end{equation*}
+
+\subsection*{Exercise 2.3}
+
+By Jensen's inequality, if $f$ is convex, then we know that $\E[f(X)] \geq f(\E[X])$.
+If it is a linear function then we know that $\E[f(X)] = f(\E[X])$. If it is concave
+then $\E[f(X)] \leq f(\E[X])$.
+
+\subsection*{Exercise 2.4}
+
+By Jensen's inequality, $\E[f(X)] \geq f(\E[X])$ for any convex functions $f$. If
+$f$ is twice differentiable and its second derivative is non-negative, then $f$ is convex. For
+$f(x) = x^k$, the second derivative is $f''(x) = k(k-1)x^{k-2}$. Since $k$ is an even number greater
+than 1, we know that the second derivative is non-negative. Hence, it is convex. 
+
+\subsection*{Exercise 2.5}
+
+The probability that $X$ is even is that
+
+\begin{equation*}
+\begin{split}
+\P[X \text{ is even}] & = \sum_{i=0,2,4...}^{n} \binom{n}{i}\left(\frac{1}{2}\right)^{n} \\
+& = \left(\frac{1}{2}\right)^{n} \sum_{i=0,2,4...}^{n} \binom{n}{i}
+\end{split}
+\end{equation*}
+
+We know that
+
+\begin{equation*}
+\begin{split}
+\binom{n}{0} & = \binom{n-1}{0} \\
+\binom{n}{1} & = \binom{n-1}{1} + \binom{n-1}{0} \\
+\binom{n}{2} & = \binom{n-1}{2} + \binom{n-1}{1} \\
+\binom{n}{3} & = \binom{n-1}{3} + \binom{n-1}{2} \\
+... \\
+\binom{n}{n-2} & = \binom{n-1}{n-2} + \binom{n-1}{n-3} \\
+\binom{n}{n-1} & = \binom{n-1}{n-1} + \binom{n-1}{n-2} \\
+\binom{n}{n} & = \binom{n-1}{n-1} \\
+\end{split}
+\end{equation*}
+
+We found that when $n$ is even
+
+\begin{equation*}
+\begin{split}
+\sum_{i=0,2,4...}^{n} \binom{n}{i} & = \binom{n}{0} + \binom{n}{2} + \binom{n}{4} + ... + \binom{n}{n} \\
+& = \binom{n-1}{0} + \binom{n-1}{1} + \binom{n-1}{2} + ... + \binom{n-1}{n-1} \\
+& = \binom{n}{1} + \binom{n}{3} + \binom{n}{5} + ... + \binom{n}{n - 1}
+\end{split}
+\end{equation*}
+
+and when $n$ is odd
+
+\begin{equation*}
+\begin{split}
+\sum_{i=0,2,4...}^{n} \binom{n}{i} & = \binom{n}{0} + \binom{n}{2} + \binom{n}{4} + ... + \binom{n}{n-1} \\
+& = \binom{n-1}{0} + \binom{n-1}{1} + \binom{n-1}{2} + ... + \binom{n-1}{n-1} \\
+& = \binom{n}{1} + \binom{n}{3} + \binom{n}{5} + ... + \binom{n}{n}
+\end{split}
+\end{equation*}
+
+Hence, $\sum_{i=0,2,4...}^{n} \binom{n}{i} = 2^{n-1}$. $\P[X \text{ is even}] = 1/2$.
+
+\subsection*{Exercise 2.6}
+
+Two six-sided dice. $X = X_1 + X_2$.
+
+(a) $\E[X | X_1 \text{ is even}] = \frac{3}{18} + \frac{4}{18} + \frac{10}{18} + \frac{12}{18} + \frac{21}{18} + \frac{24}{18}
++ \frac{18}{18} + \frac{20}{18} + \frac{11}{18} + \frac{12}{18}$.
+
+(b) $\E[X | X_1 = X_2] = 7$.
+
+(c) $\E[X_1 | X = 9] = 9/2$.
+
+(d) $\E[X_1 - X_2 | X = k] = 0 $ for $k \in [2,12]$.
+
+
+\subsection*{Exercise 2.7}
+
+$X$ and $Y$ are independent geometric random variables, where $X$ has parameter $p$ and $Y$ has parameter $q$.
+
+(a) What is $\P[X = Y]$?
+
+$\P[X = Y = n] = (1-p)^{n-1}p(1-q)^{n-1}q$. 
+
+$\P[X=Y] = \sum_{n=1}^{\infty} (1-p)^{n-1}p(1-q)^{n-1}q
+= \sum_{n=1}^{\infty} pq[(1-p)(1-q)]^{n-1}$.
+
+Since we know that for geometric random variables 
+$\P[X \geq i] = \sum_{n=i}^{\infty}(1-p)^{n-1}p = (1-p)^{i-1}$. So we have,
+
+\begin{equation*}
+\begin{split}
+S = \P[X = Y] & = \sum_{n=1}^{\infty} pq[(1-p)(1-q)]^{n-1} \\
+\frac{(p+q-pq)S}{pq} & = \sum_{n=1}^{\infty}(1-p-q+pq)^{n-1}(p+q-pq)\\
+& = (1-p-q+pq)^{1-1} = 1\\
+S & = \frac{pq}{p+q-pq}
+\end{split}
+\end{equation*}
+
+Hence, $\P[X = Y] = \frac{pq}{p+q-pq}$.
+
+(b) What is $\E[\max(X,Y)]$?
+
+From \textbf{MU 2.9} we know that $\E[\max (X,Y)] = \E[X] + \E[Y] - \E[\min(X,Y)]$.
+From part (c) we will know that $\min(X,Y)$ is a geometric random variable mean $p+q-pq$. 
+Therefore, $\E[\min(X,Y)] = \frac{1}{p+q-pq}$, and we get
+
+\begin{equation*}
+	\E[\max(X,Y)] = \frac{1}{p} + \frac{1}{q} - \frac{1}{p+q-pq}
+\end{equation*}
+
+(c) What is $\P[\min(X,Y) = k]$?
+
+We split this event into two disjoint events.
+
+\begin{equation*}
+\begin{split}
+\P[\min(X,Y) = k] & = \P[X = k, Y \geq k] + \P[X > k, Y = k] \\
+& = \P[X = k] \cdot \P[Y \geq k] + \P[X > k] \cdot \P[Y = k] \\
+& = (1-p)^{k-1}p \cdot \sum_{n=k}^{\infty}(1-q)^{n-1}q + \left(\sum_{m=k+1}^{\infty}(1-p)^{m-1}p\right) \cdot (1-q)^{k-1}q \\
+& = (1-p)^{k-1}p \cdot (1-q)^{k-1} + (1-p)^{k} \cdot (1-q)^{k-1}q \\
+& = (1-p)^{k-1}(1-q)^{k-1}(p + (1-p)q) \\
+& = [(1 - (p+q-pq)]^{k-1}(p+q-pq)
+\end{split}
+\end{equation*}
+
+(d) What is $\E[X | X \leq Y]$?
+
+\begin{equation*}
+\begin{split}
+\E[X | X \leq Y] & = \sum_{x} x \frac{\P[X = x \cap x \leq Y]}{\P[X \leq Y]}\\
+\end{split}
+\end{equation*}
+
+We investigate our denominator,
+
+\begin{equation*}
+\begin{split}
+\P[X \leq Y] & = \sum_{x = 1}^{\infty}\P[Y \geq x] \P[X = x]\\
+& = \sum_{x = 1}^{\infty}(1-q)^{x-1} (1-p)^{x-1}p \\
+& = p \sum_{x=1}^{\infty}(1-p-q+pq)^{x-1} \\
+& = \frac{p}{p+q-pq}
+\end{split}
+\end{equation*}
+
+Now the whole equation is
+
+\begin{equation*}
+\begin{split}
+\E[X | X \leq Y] & = \sum_{x} x \frac{\P[X = x \cap x \leq Y]}{\P[X \leq Y]}\\
+& = \frac{p+q-pq}{p} \cdot \sum_x x \P[X = x \cap x \leq Y]\\
+& = \frac{p+q-pq}{p} \cdot \sum_x x \P[X = x]\cdot \P[x \leq Y]\\
+& = \frac{p+q-pq}{p} \cdot \sum_x x (1-p)^{x-1}p \cdot (1-q)^{x-1}\\
+& = \sum_{x} x (1-p-q+pq)^{x-1}(p+q-pq)
+\end{split}
+\end{equation*}
+
+This is equivalent to the expectation of a geometric random variable with mean $p + q - pq$.
+Hence, $\E[X | X \leq Y] = \frac{1}{p+q-pq}$.
+
+\subsection*{Exercise 2.8}
+
+Let $G$ be the random variable that represents the number of girls they have and let $B$ be the number 
+of girls they have.
+
+(a) $\E[G] = 0 \cdot (\frac{1}{2})^k + 1 \cdot (\frac{1}{2} + \frac{1}{2^2} + \frac{1}{2^3} + ... + \frac{1}{2^{k}})
+= \frac{2^{k}-1}{2 ^k}$.
+
+$\E[B] = \sum_{n = 0}^{k - 1} \frac{n}{2^{n+1}} + \frac{k}{2^k} = \frac{2^k -1}{2^k}$.
+
+(b) We know that the expectation of the number of their children is $2$ since now it is a standard
+geometric random variable. The expected number of girls they can have is
+
+\begin{equation*}
+	\E[G] = \sum_{i = 1}^{\infty}\frac{1}{2^i} = 1
+\end{equation*}
+
+Therefore, $\E[B] = 1$.
+
+\subsection*{Exercise 2.9}
+
+(a) 
+
+\begin{equation*}
+\begin{split}
+\E[\max(X_1,X_2)] & = \sum_{x_1}\sum_{x_2}\max (x_1, x_2)(1/k)(1/k) \\
+& = 1/k^2 \sum_{x_1}\sum_{x_2 \leq x_1} x_1 + \sum_{x_2 > x_1}x_2
+\end{split}
+\end{equation*}
+
+\begin{equation*}
+\begin{split}
+\E[\min(X_1,X_2)] & = \sum_{x_1}\sum_{x_2}\min (x_1, x_2)(1/k)(1/k) \\
+& = 1/k^2 \sum_{x_1}\sum_{x_2 \leq x_1} x_2 + \sum_{x_2 > x_1}x_1
+\end{split}
+\end{equation*}
+
+(b)
+
+\begin{equation*}
+\begin{split}
+\E[\max(X_1,X_2)] + \E[\min(X_1,X_2)] & = 1/k^2 \sum_{x_1}\sum_{x_2 \leq x_1} x_1 + \sum_{x_2 > x_1}x_2 
++ 1/k^2 \sum_{x_1}\sum_{x_2 \leq x_1} x_2 + \sum_{x_2 > x_1}x_1\\
+& = 1/k^2 \sum_{x_1} \left( \sum_{x_2}x_2 + \sum_{x_2} x_1 \right) \\
+& = 1/k^2 \sum_{x_1}\sum_{x_2}(x_2 + x_1) \\
+& = \E[X_1] + \E[X_2]
+\end{split}
+\end{equation*}
+
+(c)
+
+By linearity of expectation,
+
+\begin{equation*}
+\begin{split}
+\E[\max(X_1,X_2)] + \E[\min(X_1,X_2)] & = \E[\max(X_1, X_2) + \min(X_1, X_2)] \\
+& = \E[X_1 + X_2]\\
+& = \E[X_1] + \E[X_2]
+\end{split}
+\end{equation*}
+
+
+\subsection*{Exercise 2.10}
+
+(a)
+
+When $n = 1$, there is only one $\lambda = 1$.
+
+\begin{equation*}
+\begin{split}
+f(\lambda x) \leq \lambda f(x)
+\end{split}
+\end{equation*}
+
+Inductive step, assuming for $n = k$, $f(\sum_{i=1}^{k}\lambda_i x_i) \leq \sum_{i=1}^{k}\lambda_i f(x_i)$.
+Then we have, 
+
+\begin{equation*}
+\begin{split}
+f(\sum_{i=1}^{k+1}\lambda_i x_i) & = f(\sum_{i=1}^{k-1}\lambda_i x_i + \lambda_k x_k + \lambda_{k+1} x_{k+1})\\
+& = f(\sum_{i=1}^{k-1}\lambda_i x_i + (\lambda_k + \lambda_{k+1})(\frac{\lambda_k x_k}{\lambda_k + \lambda_{k+1}} 
++ \frac{\lambda_{k+1} x_{k+1}}{\lambda_k + \lambda_{k+1}}))\\
+& = f(\sum_{i=1}^{k-1}\lambda_i x_i + \lambda_k' x_k') \\
+& \leq \sum_{i=1}^{k}\lambda_i f(x_i) \\
+& = \sum_{i=1}^{k-1}\lambda_i f(x_i) + \lambda_{k}'f(x_k') \\
+& = \sum_{i=1}^{k-1}\lambda_i f(x_i) + (\lambda_k + \lambda_{k+1})f(\frac{\lambda_k x_k}{\lambda_k + \lambda_{k+1}} 
++ \frac{\lambda_{k+1} x_{k+1}}{\lambda_k + \lambda_{k+1}}) \\
+& \leq \sum_{i=1}^{k-1}\lambda_i f(x_i) + (\lambda_k + \lambda_{k+1})(\frac{\lambda_k}{\lambda_k + \lambda_{k+1}}f(x_k) 
++ \frac{\lambda_{k+1}}{\lambda_k + \lambda_{k+1}}f(x_{k+1})) \\
+& = \sum_{i=1}^{k-1}\lambda_i f(x_i) + \lambda_k f(x_k) 
++ \lambda_{k+1} f(x_{k+1}) \\
+& = \sum_{i = 1}^{k+1} \lambda_i f(x_i)
+\end{split}
+\end{equation*}
+
+(b)
+
+If $X$ can only take finitely many values, then we can write its probability distribution as $\sum_{i=1}^{n}\lambda_i = 1$
+where $\lambda_i$ is the probability that $X$ takes the $i$th value in Im$X$.
+
+\subsection*{Exercise 2.11}
+
+Prove Lemma 2.6.
+
+\subsection*{Exercise 2.12}
+
+The expected number of cards we must draw to see all cards is
+
+\begin{equation*}
+\begin{split}
+\E[X] = \sum \E[X_i] = n \sum_{i=1}^{n} \frac{1}{i}
+\end{split}
+\end{equation*}
+
+If we draw $2n$ cards, what is the expected number of cards in the deck that are not chosen at all?
+
+The idea is to use indicator random variables. 
+The probability that the $i$th card is not chosen is $(\frac{n-1}{n})^{2n}$. 
+
+\begin{equation*}
+\begin{split}
+\E[X] = \sum \E[X_i] = n (\frac{n-1}{n})^{2n}
+\end{split}
+\end{equation*}
+
+Chosen exactly once?
+
+The probability that the $i$th card is chosen only once is 
+$\binom{2n}{1}(\frac{1}{n})(\frac{n-1}{n})^{2n-1}$.
+
+\begin{equation*}
+\begin{split}
+\E[X] = \sum \E[X_i] = 
+n \binom{2n}{1}(\frac{1}{n})(\frac{n-1}{n})^{2n-1}
+= 2n (\frac{n-1}{n})^{2n-1}
+\end{split}
+\end{equation*}
+
+\subsection*{Exercise 2.13}
+
+(a)
+
+This problem is exactly equivalent to the coupon collector’s problem we did; assume that the
+relevant pairs of coupons form a label. 
+
+(b) No matter what $k$ is, we can always get $n\ln n + \Theta(n)$.
+
+\subsection*{Exercise 2.14}
+
+The last toss must be head, so for the previous $n-1$ tosses we know there are $k-1$ heads.
+Hence, the probability is $\binom{n-1}{k-1} p^k(1-p)^{n-k}$.
+
+\subsection*{Exercise 2.15}
+
+Let $X_i$ be the number of coin flips for the next head. 
+
+\begin{equation*}
+\begin{split}
+\E[X] & = \E[\sum_{i = 1}^{k} X_i] \\
+& = \sum_{i=1}^{k} \E[X_i] \\
+& = \sum_{i=1}^{k} 1/p = k/p
+\end{split}
+\end{equation*}
+
+\subsection*{Exercise 2.16}
+
+(a)
+
+Let $X_i$ be an indicator random variable which gets 1 if there is a streak of $\log n + 1$ starting
+from the $i$th flip. Its expectation is $(1/2)^{\log n} = 1/n$ because if a streak starts from the
+$i$th flip, the next $\log n$ flips must be the same as the $i$th one. Hence the expectation of the number
+of streaks of length $\log n + 1$ is $(n - \log n)(1/n) = 1 - o(1)$.
+
+
+\noindent (b)
+
+In other words, we want to prove that with high probability there is at least one streak with length
+at least $\floor{\log n - 2\log \log n}$.
+
+Let $k = \floor{\log n - 2\log \log n}$. We break the sequence into disjoint blocks of $k$ consecutive
+flips. There are $\floor{n/k}$ such blocks. For the sequence of $n$ flips to not contain a streak of
+$k$ flips (denote this event by $A$) it is necessary that none of the blocks contains a streak of length
+$k$ (denote this event by $B$). Thus we have $\P[A] \leq \P[B]$. 
+
+The probability that a single block does not contain a streak is $1 - (1/2)^{k-1}$. Since the blocks
+are disjoint and independent, the probability that none of the blocks contains a streak is
+
+\begin{equation*}
+	\P[B] = \left(1 - \left(\frac{1}{2}\right)^{k-1} \right)^{\floor{n/k}}
+\end{equation*}
+
+Now, since $k - 1 \leq \log n - 2 \log n \log n$ and $\floor{n/k} \leq n/\log n - 1$, we get
+
+\begin{equation*}
+\begin{split}
+\P[B] & \leq \left(1 - \left(\frac{1}{2}\right)^{\log n - 2\log \log n}  \right)^{n/\log n - 1} \\
+& = \left(1 - \frac{\log^2 n}{n}\right)^{n/\log n - 1} \\
+& \leq \left(\exp\left(- \frac{\log^2 n}{n}\right)\right)^{n/\log n - 1} \\
+& = \exp\left(-\frac{\log^2 n}{n}\left(\frac{n}{\log n} - 1 \right)\right) \\
+& = \exp\left(-\log n \left(1 - \frac{\log n}{n}\right)\right)
+\end{split}
+\end{equation*}
+where the second inequality is based on the fact that $1 - x \leq e^{-x}$. Let $g(n) = 1 - \log n/n$.
+Since $g(4) = 3/4 > 1/\log e$ and since $g(n)$ is increasing for $n \geq 4$ as the derivative $g'(n) = 
+n^{-2}(\log n - 1/(\ln 2)) > 0$ when $n \geq 4$, for $n \geq 4$ we have that $g(n) \geq 1/\log e$ and 
+therefore
+
+\begin{equation*}
+	\P[B] \leq \exp \left( - \frac{\log n}{\log e} \right) = \exp(-\ln n) = \frac{1}{n}
+\end{equation*}
+
+Note that here we do not try to find out the exact probability of the event described in the problem($A$).
+Instead, we find another event $B$ which has higher probability than $A$. The probability of $B$ is 
+easier to bound.  
+
+The answer can be also found in \url{https://www.cs.helsinki.fi/u/mkhkoivi/teaching/RA-I/solutions1.pdf}
+
+\subsection*{Exercise 2.17}
+
+We see that $\E[Y_0] = 1$ and $\E[Y_1] = 2p$. Next for $i \geq 1$, we have
+\begin{equation*}
+	\E[Y_i | Y_{i-1} = j] = 2pj
+\end{equation*}
+so that
+
+\begin{equation*}
+	\E[Y_i] = \E[\E[Y_i | Y_{i-1}]] = 
+	\sum_{j} \P[Y_{i-1} = j] 2pj = 2p \E[Y_{i-1}]
+\end{equation*}
+
+Thus, we have $\E[Y_i] = (2p)^i$. When $p < 1/2$, this probability is bounded.
+
+\subsection*{Exercise 2.18}
+
+Use Induction. 
+
+Let $b_1, b_2,...,b_n$ be the values of the items observed at time $b_t$. We will prove this by
+induction. Let $M_t$ be a random variable that takes the value of the item in memory at time $t$.
+We need to show that at time $t$, $\P[M_t = b_i] = 1/t$ for all $1 \leq i \leq t$.
+
+The base case is when $t = 1$, which is trivially true since $M_t = b_1$ with probability 1. Assume
+that at time $t$, $\P[M_t = b_i] = 1/t$ for all $1 \leq i \leq t$. Now we prove that this
+property holds for time $t + 1$. At time $t+1$, we set $M_{t+1} = b_{t+1}$ with probability $1/(t+1)$.
+Therefore, $\P[M_{t+1} = b_{t+1}] = 1/(t+1)$. For the rest, $1 \leq i \leq t$,
+
+\begin{equation*}
+\begin{split}
+\P[M_{t+1} = b_i] & = \P[\text{no swat at time }t \text{ and } M_t = b_i] \\
+& = \P[\text{no swap at time } t] \P[M_t = b_i] \\
+& = \frac{t}{t+1} \frac{1}{t} \\
+& = \frac{1}{t+1}
+\end{split}
+\end{equation*}
+
+The answer can be found at \url{https://inst.eecs.berkeley.edu/~cs174/fa10/sol2.pdf}.
+
+\subsection*{Exercise 2.19}
+
+If in 2.18, when the $k$th item appears, it replaces the item in memory with probability $1/2$.
+Describe the distribution of the item in memory.
+
+In this version of the algorithm, let $X$ be random variable which is equal to $i$ if and only if the item
+in memory is the $i$th item.
+
+Then the probability distribution should be: for $i = 2,...,n$. $\P[X = i] = (\frac{1}{2})^{n-i+1}$.
+For the first item, the probability is $\P[X = 1] = (\frac{1}{2})^{n-1}$.
+
+\subsection*{Exercise 2.20}
+
+There are $n$ positions, each position can either be a fixed point or not.
+
+Let $X_i$ be an indicator showing whether the $i$th position is a fixed point.
+The permutation may put $i$ still at $i$ with probability $1/n$ since it has
+$n$ choices. So we have $\sum_{i=1}^{n}\E[X_i] = n \cdot 1/n = 1$.
+
+The solution can also be found at \url{http://www.cs.nthu.edu.tw/~wkhon/random/assignment/assign1ans.pdf}.
+
+\subsection*{Exercise 2.21}
+
+\begin{equation*}
+\begin{split}
+\E[\sum_{i=1}^{n} |a_i -i|] & = \sum_{i=1}^{n} \E[|a_i - i|] \\
+& = \sum_{i=1}^{n} \sum_{j=1}^{n} \frac{1}{n} |j-i| \\
+& = \sum_{i=1}^{n} \frac{1}{n} (\sum_{p = 1}^{i-1} p + \sum_{q=1}^{n-i}q) \\
+& = \sum_{i=1}^{n} \frac{2i^2 + n^2 + n - 2i - 2ni}{2n} \\
+& = \sum_{i=1}^{n} (\frac{i^2-i}{n} + \frac{n + 1}{2} - i) \\
+& = \sum_{i=1}^{n} \frac{i^2 - i}{n} \\
+& = \frac{n^2 - 1}{3}
+\end{split}
+\end{equation*}
+
+\subsection*{Exercise 2.22}
+
+If $i < j$ and $a_i > a_j$, let $Y_{ij}$ be an indicator random variable.
+Let $Y = \sum_{i<j} Y_{ij}$. What we want is just the expectation of $Y$.
+
+\begin{equation*}
+\begin{split}
+\E[Y] & = \sum_{i<j} \E[X_{ij}] \\
+& = \sum_{i<j} \P[a_i > a_ j] \\
+& = \sum_{i<j} \frac{1}{2} \\
+& = \frac{(n-1)n}{4}
+\end{split}
+\end{equation*}
+
+A similar solution can be seen at \url{http://www.cs.ox.ac.uk/people/varun.kanade/teaching/CS174-Fall2012/HW/HW2_sol.pdf}.
+
+\subsection*{Exercise 2.23}
+
+Let $X_i$ be the number of swaps needed when the $i$th element is inserted.
+
+We know that $\E[X_i] = \frac{i - 1}{2}$.
+
+\begin{equation*}
+\begin{split}
+\E[X] & = \sum_{i=1}^{n} \E[X_k] \\
+& = \sum_{i=1}^{n} \frac{i - 1}{2} \\
+& = \frac{n^2-n}{4}
+\end{split}
+\end{equation*}
+
+\subsection*{Exercise 2.24}
+
+We use the memoryless property. This is a very important trick. 
+There are two cases for us to discuss: 
+\begin{enumerate}
+	\item if the first is not 6, then we forget it
+	and start from the next. The expected number of flips should be $1 + \E[X]$.
+	The corresponding probability for this case is $5/6$.
+	\item if the first is 6, then we look at the second one. If it is not 6, then we forget it
+	and keep going. If it is 6, we count it as 2.
+\end{enumerate}
+
+Let $A_i$ means the event that $i$th flip is six. $\P[A_i] = 1/6$.
+
+\begin{equation*}
+\begin{split}
+\E[X] & = \P[\overline{A_1}]\E[X | \overline{A_1}]
++ \P[A_1]\E[X|A_1] \\
+& = \P[\overline{A_1}]\E[X | \overline{A_1}] + 
+\P[A_1](\P[\overline{A_2} | A_1] \E[X|A_1,\overline{A_2}] +  
+\P[A_2 | A_1] \E[X|A_1,A_2]) \\
+& = \P[\overline{A_1}]\E[X | \overline{A_1}] + 
+\P[A_1](\P[\overline{A_2}] \E[X|A_1,\overline{A_2}] +  
+\P[A_2] \E[X|A_1,A_2]) \\
+& = \frac{5}{6}\E[X | \overline{A_1}] + 
+\frac{1}{6}(\frac{5}{6} \E[X|A_1,\overline{A_2}] +  
+\frac{1}{6} \E[X|A_1,A_2]) \\
+\end{split}
+\end{equation*}
+
+Hence we know that,
+
+$\E[X] = \frac{5}{6}(1 + \E[X]) + \frac{1}{6}(\frac{5}{6}(2+\E[X]) + \frac{1}{6}\cdot 2)
+= \frac{35}{36}\E[X] + \frac{42}{36}$.
+
+\subsection*{Exercise 2.25}
+
+\subsection*{Exercise 2.26}
+
+These directed arcs will generate disjoint cycles because a node can only be an end point for two
+edges. 
+
+Let $X_i^k$ be an indicator variable which is 1 if vertex $i$ belongs to a cycle of length $k$.
+Let $Y_k = \sum_{i=1}^{n} X_n^k$ be the total number of nodes belonging to a $k$-cycle and let
+$N_k$ be the number of $k$-cycles in the graph. By definition we must have $N_k = Y_k/k$
+because these cycles are disjoint. Finally
+let $N$ be the total number of cycles in the graph, which is $N = \sum_{k=1}^{n}N_k$.
+
+We want to know how many permutations $\pi$ there are such that $X_i^k = 1$. If vertex $i$ belongs
+to a $k$-cycle, then the next vertex $j = \pi(i)$ can not be vertex $i$, vertex $\pi(j)$ can be neither
+$i$ nor $j$, and so on, until the $k$th vertex is again $i$. Thus, we can choose the consecutive $k-1$
+vertices on the same cycle in $(n-1)(n-2)...(n-k+1)$ ways. The remaining $n-k$ vertices can be in any
+order in $\pi$, so the number of possibilities is $(n-k)(n-k-1)...2\cdot 1$. The total number of permutations
+such that $X_i^k = 1$ therefore $(n-1)!$. As there are $n!$ permutations in total, the probablity of such event
+is $\P[X_i^k = 1] = (n-1)!/n! = 1/n$.
+
+By using the linearity of expectations twice, we can get the expected number of cycles.
+
+\begin{equation*}
+\E[N] = \sum_{k=1}^{n}\E[N_k] = \sum_{k=1}^{n}\frac{1}{k}\E[Y_k]
+= \sum_{k=1}^{n}\frac{1}{k} \sum_{i=1}^{n}\E[X_i^k] = 
+\sum_{k=1}^{n}\frac{1}{k} \sum_{i=1}^{n}\frac{1}{n} = \sum_{k=1}^{n}\frac{1}{k} = H(n)
+\end{equation*}
+
+\subsection*{Exercise 2.27}
+
+\begin{equation*}
+\begin{split}
+\E[X] & = \sum_{x=1}^{\infty} x \P[X = x] \\ 
+& = \sum_{x=1}^{\infty} \frac{6}{\pi^2} \frac{1}{x}
+\end{split}
+\end{equation*}
+
+This sum diverges since $\sum \frac{1}{x}$ diverges, so the expectation is not finite.
+
+\subsection*{Exercise 2.28}
+
+\subsection*{Exercise 2.29}
+
+\subsection*{Exercise 2.30}
+
+\subsection*{Exercise 2.31}
+
+\subsection*{Exercise 2.32}
+
+(a)
+
+$E_i$s are disjoint events, therefore $\P[E] = \sum_{i=1}^{n} \P[E_i]$. For
+$i \leq m$, $\P[E_i] = 0$, since none of them are selected. Now, for $i>m$ two indepedent
+events make up $E_i$.
+
+\begin{equation*}
+\begin{split}
+\P[E_i] & = \P[\text{the } i \text{th candidate is the best}] \cdot 
+\P[\text{the } i \text{th candidate is chosen}] \\
+& = \frac{1}{n} \cdot \P[\text{best of the first } i-1 \text{ candidates is in the first }m \text{ candidates}]\\
+& = \frac{1}{n} \frac{m}{i-1}
+\end{split}
+\end{equation*}
+
+Now, putting this all together, we get
+
+\begin{equation*}
+\begin{split}
+\P[E] = \sum_{i=m+1}^{n} \P[E_i] = \frac{m}{n}\sum_{i=m+1}^{n}\frac{1}{i-1}
+\end{split}
+\end{equation*}
+
+(b)
+
+Using Lemma 2.10 from the book,
+
+\begin{equation*}
+	\P[E] \geq \frac{m}{n}\int_{m+1}^{n+1}\frac{1}{x-1}dx = 
+	\ln(x-1)|_{m+1}^{n+1} = \frac{m}{n}(\ln n - \ln m)
+\end{equation*}
+
+and
+
+\begin{equation*}
+\P[E] \leq \frac{m}{n}\int_{m}^{n}\frac{1}{x-1}dx = 
+\ln(x-1)|_{m}^{n} = \frac{m}{n}(\ln (n-1) - \ln (m-1))
+\end{equation*}
+
+
+(c)
+
+Since the bound from above is concave, we can take the derivative to find the $m$
+so that the function is maximized. 
+
+\begin{equation*}
+\frac{\mathrm{d}}{\mathrm{d} m}\frac{m}{n}(\ln n - \ln m) = \frac{\ln n}{n} - \frac{\ln m}{n} + \frac{1}{n} = 0
+\end{equation*}
+
+Then we get $\ln m = \ln n - 1$, which is 
+
+\begin{equation*}
+m = e^{\ln n -1} = e^{\ln n}e^{-1} = ne^{-1} = \frac{n}{e}
+\end{equation*}
+
+Substituting this $m$ back into the bound from part (b), we get
+
+\begin{equation*}
+\P[E] \geq \frac{1}{e} (\ln n - \ln \frac{n}{e}) = 1/e
+\end{equation*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
