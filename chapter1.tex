@@ -8,67 +8,63 @@
 
 Flip a fair coin ten times.
 
-\noindent (a) $\P(\text{\#heads = \#tails}) = \frac{\binom {10} 5}{2^{10}} = \frac{63}{256}$
+\begin{itemize}
+	\item[(a)] $\P(\text{\#heads = \#tails}) = \frac{\binom {10} 5}{2^{10}} = \frac{63}{256}$. Just choose 5 coins which can be heads.
+	\item[(b)] $\P(\text{more heads than tails}) = \left(\binom {10}{6} + \binom {10}{7} + \binom {10}{8} +
+	\binom {10}{9} + \binom {10}{10} \right) / 2^{10}$. Ensure that the number of heads are more than 5.
+	\item[(c)] $\P(\text{the ith flip and the (11-i)th flip are the same for i = 1...5}) = (1/2)^{5}$. For one $i$, the probability is 1/2.
+	\item[(d)] \textbf{Method 1: }
+	
+	$\P(\text{at least 4 consecutive heads}) = \P(\text{consecutive 4}) + \P(\text{consecutive 5}) + \P(\text{consecutive 6})
+	+\P(\text{consecutive 7}) + \P(\text{consecutive 8}) + \P(\text{consecutive 9}) + \P(\text{consecutive 10}) = ( (2 \times 2^5 + 5 \times 2^4 - 3 - 2)
+	+ (2 \times 2^4 + 4 \times 2^3) + (2 \times 2^3 + 3 \times 2^2) + (2 \times 2^2 + 2 \times 2^1) + (2 \times 2^1 + 1 \times 2^0) + 2 + 1)
+	/1024 = 251/1024 $.Consecutive 5,6,7,8,9,10 are easy to understand. Consecutive 4 is special. There are 2 cases in consecutive 4 which are actually
+	consecutive 5 (HHHHTHHHHH and HHHHHTHHHH). There are 3 cases in consecutive 4 which are duplicated (HHHHTTHHHH, HHHHTHHHHT, THHHHTHHHH). 
+	
+	
+	\textbf{Method 2, recursion:}
+	
+	Let $\P_4(n)$ be the probability that you have at least 4 consecutive heads after n flips.
+	Clearly $\P_4(0) = \P_4(1) = \P_4(2) = \P_4(3) = 0$ and $\P_4(4)= 2^{-4}$.
+	
+	For more flips, either you have achieved 4 consecutive heads in the first a few flips already or you have a string without 
+	4 consecutive heads followed by `THHHH...'. So for $n > 4$: $\P_4(n) = \P_4 (n - 1) + 2^{-5} (1 - \P_4(n-5))$.
+	Because, if $(n-1)$ already has 4 consecutive heads, the probability is just $\P_4(n-1)$, if it does
+	not have, and we want $n$ to have, then we know that the $n$th flip must be H and the last 5 flips
+	out of $n$ flips must be THHHH. Only in this way can we say that the first $n-1$ does not achieve it but with the last flip it does. 
+	
+\end{itemize}
 
-\noindent (b) $\P(\text{more heads than tails}) = \left(\binom {10}{6} + \binom {10}{7} + \binom {10}{8} +
-\binom {10}{9} + \binom {10}{10} \right) / 2^{10}$
-
-\noindent (c) $\P(\text{the ith flip and the (11-i)th flip are the same for i = 1...5}) = (1/2)^{5}$
-
-\noindent (d) $\P(\text{at least 4 consecutive heads}) = \P(\text{consecutive 4}) + \P(\text{consecutive 5}) + \P(\text{consecutive 6})
-+\P(\text{consecutive 7}) + \P(\text{consecutive 8}) + \P(\text{consecutive 9}) + \P(\text{consecutive 10}) = ( (2 \times 2^5 + 5 \times 2^4 - 3 - 2)
-+ (2 \times 2^4 + 4 \times 2^3) + (2 \times 2^3 + 3 \times 2^2) + (2 \times 2^2 + 2 \times 2^1) + (2 \times 2^1 + 1 \times 2^0) + 2 + 1)
-/1024 = 251/1024 $.
-
-Consecutive 5,6,7,8,9,10 are easy to understand. Consecutive 4 is special. There are 2 cases in consecutive 4 which are actually
-consecutive 5 (HHHHTHHHHH and HHHHHTHHHH). There are 3 cases in consecutive 4 which are duplicated (HHHHTTHHHH, HHHHTHHHHT, THHHHTHHHH). 
-
-
-Another method of doing this is to use recursion. 
-
-Let $\P_4(n)$ be the probability that you have at least 4 consecutive heads after n flips.
-Clearly $\P_4(0) = \P_4(1) = \P_4(2) = \P_4(3) = 0$ and $\P_4(4)= 2^{-4}$.
-
-For more flips, either you have achieved 4 consecutive heads already or you have a string without 
-4 consecutive heads followed by THHHH. So for $n > 4$: $\P_4(n) = \P_4 (n - 1) + 2^{-5} (1 - \P_4(n-5))$.
-Because, if $(n-1)$ already has 4 consecutive heads, the probability is just $\P_4(n-1)$, if it does
-not have, and we want $n$ to have, then we know that the $n$th flip must be H and the last 5 flips
-out of $n$ flips must be THHHH. Only in this way can we say that the first $n-1$ does not achieve it
-but with the last flip it achieves. 
 
 \subsection*{Exercise 1.2}
 
 Roll two standard dice.
 
-\noindent (a) same number: 1/6
-
-\noindent (b) the number on the 1st dice $>$ the number on the 2nd dice: 15/36, (6 equal cases, the rest are symmetric)
-
-\noindent (c) the sum is even: 1/2
-
-\noindent (d) the product is a perfect square: (6 + 2)/36. (6 pairs of identical numbers, 1 * 4 and 4 * 1 are also two cases)
+\begin{itemize}
+	\item[(a)] Same number: 1/6.
+	\item[(b)] The number on the 1st dice $>$ the number on the 2nd dice: 15/36, (6 equal cases, the rest are symmetric).
+	\item[(c)] The sum is even: 1/2.
+	\item[(d)] The product is a perfect square: (6 + 2)/36. (6 pairs of identical numbers, 1 * 4 and 4 * 1 are also two cases)
+\end{itemize}
 
 
 \subsection*{Exercise 1.3}
 
 Shuffle a standard deck of cards.
 
-\noindent (a) first two cards include at least one ace: $1 - \frac{48}{52} \cdot \frac{47}{51}$, use 1 minus the probability
-that neither of them is ace. Or we can view it as just draw two cards from a deck and they have at least one ace: 
-1 - $\binom{48}{2}/\binom{52}{2}$.
-
-
-\noindent (b) first five cards include at least one ace: 
-$1 - \frac{48 \times 47 \times 46 \times 45 \times 44}{52 \times 51 \times 50 \times 49 \times 48}$
-
-\noindent (c) first two cards are a pair of the same rank: 3/51
-
-\noindent (d) first five cards are all diamonds: $(13 \times 12 \times 11 \times 10 \times 9)/(52 \times 51 \times 50 \times 49 \times 48)$
-
-\noindent (e) first five cards form a full house ( three of one rank and two of another rank):
-in this problem, we see it as drawing 5 random cards from a deck. The sample space is $\binom{52}{5}$. To be a full house, we need to
-first pick two numbers $\binom{13}{2}$, then one of them has three cards and the other has two cards $\binom{4}{3} \binom{4}{2} \times 2 = 3744$.
-So the probability is 3744/$\binom{52}{5}$.
+\begin{itemize}
+	\item[(a)] First two cards include at least one ace: $1 - \frac{48}{52} \cdot \frac{47}{51}$, use 1 minus the probability
+	that neither of them is ace. Or we can view it as just draw two cards from a deck and they have at least one ace: 
+	1 - $\binom{48}{2}/\binom{52}{2}$.
+	\item[(b)] First five cards include at least one ace: 
+	$1 - \frac{48 \times 47 \times 46 \times 45 \times 44}{52 \times 51 \times 50 \times 49 \times 48}$
+	\item[(c)] First two cards are a pair of the same rank: 3/51. Whatever the first card is, we look at the probability that the second one is at the same rank as the first one.
+	\item[(d)] First five cards are all diamonds: $(13 \times 12 \times 11 \times 10 \times 9)/(52 \times 51 \times 50 \times 49 \times 48)$.
+	\item[(e)] First five cards form a full house ( three of one rank and two of another rank):
+	in this problem, we see it as drawing 5 random cards from a deck. The sample space is $\binom{52}{5}$. To be a full house, we need to
+	first pick two numbers $\binom{13}{2}$, then one of them has three cards and the other has two cards $\binom{13}{2}\binom{4}{3} \binom{4}{2} \times 2 = 3744$. The last 2 means that there are two ways to 
+	So the probability is 3744/$\binom{52}{5}$.
+\end{itemize}
 
 \subsection*{Exercise 1.4}
 
@@ -88,6 +84,7 @@ We want to verify this result. Since $k < n$, we know that for a fixed $n$ we ne
 \begin{equation*}
 \sum_{k = 0}^{n - 1} \P[E_k] = \sum_{k = 0}^{n - 1} \frac{\binom{n+k-1}{k}}{2^{n+k-1}} = 1
 \end{equation*}
+
 
 
 \subsection*{Exercise 1.5}
